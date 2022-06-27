@@ -1,7 +1,8 @@
 import './charListItem.scss'
 import PropTypes from 'prop-types'
+import {Transition} from 'react-transition-group';
 
-const CharListItem = ({item, onClick, selected}) => {
+const CharListItem = ({item, onClick, selected, styleInfo}) => {
   
   const styleImg = item.thumbnail.includes('image_not_available') ? {objectFit: "unset"} : {objectFit: "cover"}
 
@@ -14,15 +15,17 @@ const CharListItem = ({item, onClick, selected}) => {
     }
   }
 
-  return (
-        <li tabIndex={0} className = {stylesItem}
-            onClick = {onClick} onKeyDown = {onPressKey}>
-            <img style={styleImg} src={item.thumbnail} alt={item.name}/>
-            <div className="char__name">{item.name}</div>
-        </li>
-  )
-}
 
+  return (
+
+        <li tabIndex={0} className = {stylesItem}
+          onClick = {onClick} onKeyDown = {onPressKey}
+           style = {styleInfo} >
+          <img style={styleImg} src={item.thumbnail} alt={item.name}/>
+          <div className="char__name">{item.name}</div>
+        </li>
+      )
+  }
 CharListItem.propTypes = {
   onClick: PropTypes.func.isRequired,
   item: PropTypes.object.isRequired

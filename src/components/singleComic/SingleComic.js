@@ -1,13 +1,13 @@
 import './singleComic.scss';
-import xMen from '../../resources/img/x-men.png';
 import { useEffect, useState } from 'react/cjs/react.development';
 import useMarvelService from '../../services/marvel-service';
 import Spinner from '../spinner/spinner';
 import ErrorIndicator from '../errorIndicator/errorIndicator';
 import { Link } from 'react-router-dom';
+import testHoc from '../../hoc/hoc';
 
 const SingleComic = ({id}) => {
-    console.log('render');
+
     const [comic, setComic] = useState(null)
     const {loading, error, getComic, clearError} = useMarvelService();
 
