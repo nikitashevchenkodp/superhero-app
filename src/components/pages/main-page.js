@@ -5,6 +5,7 @@ import CharList from '../charList/CharList'
 import ErrorBoundry from '../errorBoundry/errorBoundry'
 import RandomChar from '../randomChar/RandomChar'
 import decoration from '../../resources/img/vision.png';
+import Form from '../form/form'
 
 
 const MainPage = () => {
@@ -25,7 +26,10 @@ const MainPage = () => {
             <ErrorBoundry>
                 <CharList onCharSelected = {onCharSelected} selected = {selectedChar} />
             </ErrorBoundry>
-            <CharInfo charId = {selectedChar}/>
+            <div className='sidebar'>
+                <CharInfo charId = {selectedChar}/>
+                <Form/>
+            </div>
         </div>
         <img className="bg-decoration" src={decoration} alt="vision"/>
     </>
