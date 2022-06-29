@@ -2,8 +2,8 @@ import React from 'react'
 import './singleCharacter.scss'
 
 
-const SingleCharacter = ({item}) => {
-    const {name, description, thumbnail} = item
+const SingleCharacter = ({data}) => {
+    const {name, description, thumbnail} = data
     return (
         <div className="single-comic">
             <img src={thumbnail} alt={name} className="single-comic__img"/>

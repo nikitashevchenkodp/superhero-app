@@ -2,9 +2,9 @@ import './singleComic.scss';
 import { Link } from 'react-router-dom';
 import {Helmet} from 'react-helmet';
 
-const SingleComic = ({item}) => {
+const SingleComic = ({data}) => {
 
-    const {title, price, description, pages, thumbnail} = item;
+    const {title, price, description, pages, thumbnail} = data;
 
     return (
         <div className="single-comic">

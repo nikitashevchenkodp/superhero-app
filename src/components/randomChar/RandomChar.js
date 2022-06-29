@@ -1,15 +1,13 @@
 import './randomChar.scss';
 import mjolnir from '../../resources/img/mjolnir.png';
-import Spinner from '../spinner/spinner';
-import ErrorIndicator from '../errorIndicator/errorIndicator'
 import useMarvelService from '../../services/marvel-service';
 import { useEffect, useState } from 'react/cjs/react.development';
-
+import setContent from '../../utils/setContent'
 const RandomChar = () => {
 
     const [char, setChar] = useState(null)
     
-    const {loading, error, getCharacter, clearError} = useMarvelService();
+    const { getCharacter, clearError, process, setProcess} = useMarvelService();
 
     useEffect(() => {
         updateChar()
@@ -19,6 +17,7 @@ const RandomChar = () => {
         // return () => {
         //     clearInterval(timerId)
         // }
+        // eslint-disable-next-line
     }, [])
 
     const onCharLoaded = (char) => {
@@ -30,20 +29,13 @@ const RandomChar = () => {
         const id = Math.floor(Math.random() * (1011400 - 1011000) + 1011000);
         getCharacter(id)
                 .then(onCharLoaded)
+                .then(() => setProcess('confirmed'))
     }
     
-    const text = "Here is no description..."
-    const modDescription = char?.description ? `${char.description.slice(0, 150)}...` : text
-    
-    const errorMessage = error ? <ErrorIndicator/> : null;
-    const spinner = loading ? <Spinner/> : null;
-    const content = !(loading || error || !char) ? <View char={char} modDescription = {modDescription}/> : null;
 
     return (
         <div className="randomchar">
-            {spinner}
-            {content}
-            {errorMessage}
+            {setContent(process, View, char)}
             <div className="randomchar__static">
                 <p className="randomchar__title">
                     Random character for today!<br/>
@@ -63,12 +55,15 @@ const RandomChar = () => {
 
 }
 
-const View = ({char, modDescription}) => {
+const View = ({data}) => {
 
-    const {name, thumbnail, homepage, wiki} = char;
+    const {name, thumbnail, homepage, wiki, description} = data;
 
     const imgStyle = thumbnail.includes('image_not_available') ? {objectFit: "contain"} : {objectFit: "cover"}
-
+    
+    const text = "Here is no description..."
+    const modDescription = description ? `${description.slice(0, 150)}...` : text
+   
     return (
         <div className="randomchar__block">
             <img style={imgStyle} src={thumbnail} alt="Random character" className="randomchar__img"/>

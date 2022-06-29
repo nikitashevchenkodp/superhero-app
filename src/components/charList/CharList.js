@@ -5,8 +5,7 @@ import ErrorIndicator from '../errorIndicator/errorIndicator';
 import Spinner from '../spinner/spinner';
 import PropTypes from 'prop-types'
 import useMarvelService from '../../services/marvel-service';
-import {CSSTransition, TransitionGroup, Transition} from 'react-transition-group'
-
+import {TransitionGroup, Transition} from 'react-transition-group';
 
 const CharList = (props) => {
 
@@ -15,12 +14,12 @@ const CharList = (props) => {
     const [offset, setOffset] = useState(210)
     const [charEnded, setCharEnded] = useState(false)
     const [transition, setTransition] = useState(false)
-
+    console.log('Char List')
     const {loading, error, getAllCharacters} = useMarvelService();
 
     useEffect(() => {
         onRequest(offset, true)
-
+        // eslint-disable-next-line
     }, [])
 
     const onRequest = (offset, initial) => {
@@ -46,12 +45,11 @@ const CharList = (props) => {
 
     const defaultStyle = {
         transition: `all ${duration}ms ease-in`,
-        transform: 'scale(0.8)'
     }
 
     const transitionStyles = {
         entering: { opacity: 0},
-        entered:  { opacity: 1, transform: 'scale(1)' },
+        entered:  { opacity: 1},
         exiting:  { opacity: 0 },
         exited:  { opacity: 0 },
     };
@@ -78,6 +76,7 @@ const CharList = (props) => {
     }
 
     const items = renderItems(charList)
+
 
     const errorMessage = error ? <ErrorIndicator /> : null;
     const spinner = loading ? <Spinner /> : null;

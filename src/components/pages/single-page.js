@@ -2,12 +2,11 @@ import React from 'react'
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react/cjs/react.development';
 import useMarvelService from '../../services/marvel-service'
-import ErrorIndicator from '../errorIndicator/errorIndicator';
-import Spinner from '../spinner/spinner';
+import setContent from '../../utils/setContent'
 
 const SingleItemPage = ({Component, dataType}) => {
 
-    const {loading, error, clearError, getComic, getCharacterByName} = useMarvelService();
+    const {clearError, getComic, getCharacterByName, process, setProcess} = useMarvelService();
     const {id} = useParams();
     const [item, setItem] = useState(null);
 
@@ -15,6 +14,7 @@ const SingleItemPage = ({Component, dataType}) => {
 
     useEffect(() => {
         onLoadItem();
+        // eslint-disable-next-line
     }, [id])
 
     const updateItem = () => {
@@ -32,18 +32,12 @@ const SingleItemPage = ({Component, dataType}) => {
         clearError()
         updateItem()
             .then(res => setItem(res))
+            .then(() => setProcess('confirmed'))
     }
-    const spinner = loading ? <Spinner /> : null
-    const errorMessage = error ?  <ErrorIndicator/> : null
-    const content = (!error && !loading && item) ?  <Component item = {item} /> : null
-
-
 
     return (
        <>
-            {spinner}
-            {errorMessage}
-            {content}
+            {setContent(process, Component, item)}
        </>
     )
 }

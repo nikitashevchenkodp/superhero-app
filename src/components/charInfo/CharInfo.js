@@ -1,20 +1,18 @@
 import './charInfo.scss';
-import { Component, useEffect, useState } from 'react/cjs/react.development';
-import MarvelService from '../../services/marvel-service';
-import ErrorIndicator from '../errorIndicator/errorIndicator';
-import Spinner from '../spinner/spinner';
-import Skeleton from '../skeleton/Skeleton'
+import { useEffect, useState } from 'react/cjs/react.development';
 import PropTypes from 'prop-types'
 import useMarvelService from '../../services/marvel-service';
+import setContent from '../../utils/setContent';
 
 const CharInfo = ({charId}) => {
 
     const [char, setChar] = useState(null)
-    const {loading, error, getCharacter} = useMarvelService();
+    const {getCharacter, process, setProcess} = useMarvelService();
     console.log(char);
 
     useEffect(() => {
         updateChar();
+        // eslint-disable-next-line 
     }, [charId])
 
     const onCharLoaded = (char) => {
@@ -27,28 +25,21 @@ const CharInfo = ({charId}) => {
         }
         getCharacter(charId)
             .then(onCharLoaded)
+            .then(() => setProcess('confirmed'))
     }
 
-
-    const skeleton = char || loading || error ? null : <Skeleton />
-    const errorMessage = error ? <ErrorIndicator /> : null;
-    const spinner = loading ? <Spinner /> : null;
-    const data = (!loading && !error && char) ? <View char = {char}/> : null;
-
+    
     return (
         <div className="char__info">
-            {skeleton}
-            {errorMessage}
-            {spinner}
-            {data}
+            {setContent(process, View, char)}
         </div>
     )
 
-}
+}  
 
-const View = ({char}) => {
-    const {name, description, thumbnail, homepage, wiki, comics} = char
-    const styleImg = char.thumbnail.includes('image_not_available') ? {objectFit: "unset"} : {objectFit: "cover"}
+const View = ({data}) => {
+    const {name, description, thumbnail, homepage, wiki, comics} = data
+    const styleImg = data.thumbnail.includes('image_not_available') ? {objectFit: "unset"} : {objectFit: "cover"}
     return (
         <>
         <div className="char__basics">

@@ -1,6 +1,6 @@
 import './charListItem.scss'
 import PropTypes from 'prop-types'
-import {Transition} from 'react-transition-group';
+
 
 const CharListItem = ({item, onClick, selected, styleInfo}) => {
   
@@ -15,7 +15,6 @@ const CharListItem = ({item, onClick, selected, styleInfo}) => {
     }
   }
 
-
   return (
 
         <li tabIndex={0} className = {stylesItem}
@@ -26,6 +25,8 @@ const CharListItem = ({item, onClick, selected, styleInfo}) => {
         </li>
       )
   }
+
+  
 CharListItem.propTypes = {
   onClick: PropTypes.func.isRequired,
   item: PropTypes.object.isRequired

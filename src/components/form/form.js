@@ -4,7 +4,6 @@ import * as Yup from 'yup'
 import './form.scss'
 import useMarvelService from '../../services/marvel-service'
 import { useState } from 'react/cjs/react.development'
-import { Link } from 'react-router-dom'
 import { useHistory } from 'react-router-dom'
 
 const Form = () => {
