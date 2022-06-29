@@ -36,10 +36,6 @@ const Form = () => {
     })
 
 
-
-    
-
-
   return (
     <form className='form' onSubmit={formik.handleSubmit}>
         <div className='form__text'>Or find a character by name:</div>

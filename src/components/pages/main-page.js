@@ -6,6 +6,7 @@ import ErrorBoundry from '../errorBoundry/errorBoundry'
 import RandomChar from '../randomChar/RandomChar'
 import decoration from '../../resources/img/vision.png';
 import Form from '../form/form'
+import Helmet from 'react-helmet'
 
 
 const MainPage = () => {
@@ -19,6 +20,13 @@ const MainPage = () => {
 
   return (
     <>
+        <Helmet>
+            <meta
+                name="description"
+                content="Marvel information portal"
+                />
+            <title>Marvel information portal</title>
+        </Helmet>
         <ErrorBoundry>
             <RandomChar/>
         </ErrorBoundry>
