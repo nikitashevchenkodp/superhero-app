@@ -14,7 +14,6 @@ const CharList = (props) => {
     const [offset, setOffset] = useState(210)
     const [charEnded, setCharEnded] = useState(false)
     const [transition, setTransition] = useState(false)
-    console.log('Char List')
     const {loading, error, getAllCharacters} = useMarvelService();
 
     useEffect(() => {

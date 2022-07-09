@@ -10,7 +10,6 @@ const SingleItemPage = ({Component, dataType}) => {
     const {id} = useParams();
     const [item, setItem] = useState(null);
 
-    console.log(item);
 
     useEffect(() => {
         onLoadItem();

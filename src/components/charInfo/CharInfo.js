@@ -8,7 +8,6 @@ const CharInfo = ({charId}) => {
 
     const [char, setChar] = useState(null)
     const {getCharacter, process, setProcess} = useMarvelService();
-    console.log(char);
 
     useEffect(() => {
         updateChar();

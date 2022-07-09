@@ -35,7 +35,6 @@ const MainPage = () => {
             </ErrorBoundry>
             <div className='sidebar'>
                 <CharInfo charId = {selectedChar}/>
-                <Form/>
             </div>
         </div>
         <img className="bg-decoration" src={decoration} alt="vision"/>
